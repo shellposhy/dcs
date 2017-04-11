@@ -17,6 +17,13 @@
 	<!-- dependencies -->
 	<dependencies>
 
+		<!-- base -->
+		<dependency>
+		  <groupId>cn.com.zhihuigu</groupId>
+		  <artifactId>common-util</artifactId>
+		  <version>1.0</version>
+		</dependency>
+		
 		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

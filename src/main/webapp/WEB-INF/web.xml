@@ -10,6 +10,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:applicationContext.xml
+			classpath:applicationContext-*.xml
 		</param-value>
 	</context-param>
 
@@ -20,7 +21,7 @@
 	<listener>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
-
+	
 	<!-- jsp configuration -->
 	<jsp-config>
 		<jsp-property-group>
@@ -129,7 +130,7 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.otf</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- spring jndi -->
 	<context-param>
 		<param-name>spring.profiles.active</param-name>
