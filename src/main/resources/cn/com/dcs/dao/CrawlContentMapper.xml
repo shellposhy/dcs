@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.com.dcs.dao.CrawlContentMapper">
+	<resultMap id="resultMap" type="cn.com.dcs.model.CrawlContent">
+		<result property="id" column="ID" />
+		<result property="linkID" column="Link_ID" />
+		<result property="name" column="Name" />
+		<result property="code" column="Code" />
+		<result property="formula" column="Formula" />
+		<result property="status" column="Status" />
+		<result property="savePath" column="Save_Path" />
+	</resultMap>
+	
+	<select id="findBySiteId" resultMap="resultMap" parameterType="java.lang.Integer">
+		SELECT * FROM crawl_content c WHERE  c.Link_ID IN(SELECT l.ID FROM crawl_link l WHER l.Unit_ID=#{siteId})
+	</select>
+
+	<select id="findAll" resultMap="resultMap">
+		SELECT * FROM crawl_content
+	</select>
+
+	<select id="find" resultMap="resultMap">
+		SELECT * FROM crawl_content WHERE ID=#{id}
+	</select>
+
+	<insert id="insert">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO crawl_content(Link_ID,Name,Code,Formula,Status,Save_Path)
+		VALUES(#{linkID},#{name},#{code},#{formula},#{status},#{savePath})
+	</insert>
+
+	<update id="update">
+		UPDATE crawl_content SET
+		Link_ID = #{linkID},
+		Name =#{name},
+		Code = #{code},
+		Formula = #{formula},
+		Status = #{status},
+		Save_Path = #{savePath}
+		WHERE ID=#{id}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM crawl_content WHERE ID=#{id}
+	</delete>
+</mapper>
