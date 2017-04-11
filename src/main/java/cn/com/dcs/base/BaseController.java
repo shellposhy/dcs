@@ -25,7 +25,6 @@ import cn.com.dcs.framework.view.HtmlEscapeEditor;
  * @author shishb
  * @version 1.0
  */
-@SuppressWarnings("restriction")
 @Controller
 public class BaseController {
 	private static Logger log = Logger.getLogger(BaseController.class.getName());

@@ -15,6 +15,21 @@
 		<result property="createTime" column="Create_Time" />
 	</resultMap>
 	
+	<select id="findByName" resultMap="resultMap" parameterType="java.util.Map" >
+		SELECT * FROM crawl_unit 
+		<if test="name!=null">
+			WHERE Name like "%"#{name}"%"
+		</if>
+		limit #{firstSize}, #{size}
+	</select>
+	
+	<select id="countByName" resultType="int" parameterType="java.lang.String">
+		SELECT COUNT(*) FROM crawl_unit 
+		<if test="name!=null">
+			WHERE Name like "%"#{name}"%"
+		</if>
+	</select>
+	
 	<select id="findAll" resultMap="resultMap">
 		SELECT * FROM crawl_unit
 	</select>

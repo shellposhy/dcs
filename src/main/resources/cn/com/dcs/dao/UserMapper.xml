@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.com.dcs.dao.UserMapper">
+	<resultMap id="resultMap" type="cn.com.dcs.model.User">
+		<result property="id" column="ID" />
+		<result property="name" column="Name" />
+		<result property="realName" column="Real_Name" />
+		<result property="password" column="Password" />
+	</resultMap>
+	
+	<select id="findByNameAndPassword" resultMap="resultMap" parameterType="java.util.Map">
+		SELECT * FROM user WHERE Name=#{name} AND Password=#{pass}
+	</select>
+</mapper>
