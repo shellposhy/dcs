@@ -8,6 +8,6 @@ import cn.com.dcs.dao.CrawlUnitMapper;
 
 @Service
 public class CrawlUnitService {
-@Resource
-private CrawlUnitMapper w;
+	@Resource
+	private CrawlUnitMapper crawlUnitMapper;
 }

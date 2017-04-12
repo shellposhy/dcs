@@ -1,9 +1,14 @@
 package cn.com.dcs.controller;
 
+import java.io.IOException;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.google.common.base.Strings;
 
 import cn.com.dcs.base.BaseController;
+import cn.com.dcs.framework.tree.MenuTreeNode;
 import cn.com.dcs.model.User;
+import cn.com.dcs.service.UserActionService;
 import cn.com.dcs.service.UserService;
 import cn.com.people.data.util.StringUtil;
 
@@ -29,6 +36,8 @@ public class LoginController extends BaseController {
 
 	@Resource
 	private UserService userService;
+	@Resource
+	private UserActionService userActionService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String admin(HttpServletRequest request) {
@@ -61,9 +70,12 @@ public class LoginController extends BaseController {
 	 * 
 	 * @param request
 	 * @return
+	 * @throws IOException
+	 * @throws JsonMappingException
+	 * @throws JsonGenerationException
 	 */
 	@RequestMapping(value = "/security/check", method = RequestMethod.POST)
-	public String excute(HttpServletRequest request) {
+	public String excute(HttpServletRequest request) throws JsonGenerationException, JsonMappingException, IOException {
 		log.debug("=======admin.security.check=========");
 		String name = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -71,6 +83,10 @@ public class LoginController extends BaseController {
 		if (null == currentUser) {
 			return "/admin/login";
 		}
+		MenuTreeNode menuTreeNode = userActionService.getMenuTree();
+		ObjectMapper om = new ObjectMapper();
+		String jsonActionTree = om.writeValueAsString(menuTreeNode);
+		request.getSession().setAttribute("jsonActionTree", jsonActionTree);
 		request.getSession().setAttribute("currentUser", currentUser);
 		if (!Strings.isNullOrEmpty(request.getParameter("from"))) {
 			return "redirect:" + request.getParameter("from");
