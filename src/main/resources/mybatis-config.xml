@@ -8,5 +8,6 @@
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="cn.com.dcs.framework.base.constant.ELogAction" />
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="cn.com.dcs.framework.base.constant.ELogTargetType" />
 		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="cn.com.dcs.framework.base.constant.ECrawlStatus" />
+		<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="cn.com.dcs.framework.base.constant.EActionUserType" />
 	</typeHandlers>
 </configuration>

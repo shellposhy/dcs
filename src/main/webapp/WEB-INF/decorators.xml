@@ -10,14 +10,13 @@
 		<pattern>/admin/img/**</pattern>
 		<pattern>/static/**</pattern>
 		<pattern>/exception</pattern>
-		<pattern>/admin</pattern>
 	</excludes>
 	
 	<decorator name="default" page="current.jsp">
 		<pattern>/admin/*</pattern>
+		<pattern>/admin</pattern>
 	</decorator>
 	
 	<decorator name="popup" page="popup.jsp">
-		<pattern>/admin/org/*/edit</pattern>
 	</decorator>
 </decorators>
