@@ -85,44 +85,32 @@ function init_load_field() {
 // 表单验证
 function model_form_validate() {
 	if($("#cl_new_form")){
-		$("#cl_new_form").validate(
-				{
-					rules : {
-						name : {
-							required : true
-						},
-						code : {
-							required : true
-						},
-						moreFieldsSelect : {
-							required : function() {
-								if ($("#moreFields").val() == null
-										|| $("#moreFields").val() == "") {
-									return false;
-								} else {
-									return true;
-								}
-							}
+		$("#cl_new_form").validate({
+			rules : {
+				name : {required : true},
+				code : {required : true},
+				moreFieldsSelect : {
+					required : function() {
+						if ($("#moreFields").val() == null|| $("#moreFields").val() == "") {
+							return false;
+						} else {
+							return true;
 						}
-					},
-					messages : {
-						name : {
-							required : "栏目名称不能为空！"
-						},
-						code : {
-							required : "栏目编码不能为空！"
-						},
-						moreFieldsSelect : {
-							required : "字段组号不能为空！"
-						}
-					},
-					errorPlacement : function(error, element) {
-						error.insertAfter(element);
-					},
-					submitHandler : function() {
-						form.submit();
-					},
-					onkeyup : false
-				});
+					}
+				}
+			},
+			messages : {
+				name : {required : "栏目名称不能为空！"},
+				code : {required : "栏目编码不能为空！"},
+				moreFieldsSelect : {required : "字段组号不能为空！"}
+			},
+			errorPlacement : function(error, element) {
+				error.insertAfter(element);
+			},
+			submitHandler : function() {
+				form.submit();
+			},
+			onkeyup : false
+		});
 	}
 }

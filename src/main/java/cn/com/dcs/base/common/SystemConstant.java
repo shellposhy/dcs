@@ -114,4 +114,9 @@ public class SystemConstant {
 	public static final String VAR_DATE_TIME_MONTH_START = "<Var:DateTime_Month_S>";
 	public static final String VAR_DATE_TIME_MONTH_END = "<Var:DateTime_Month_E>";
 
+	/**
+	 * 数据抓取时，时间间隔
+	 */
+	public static final int CRAWL_INTERVALTIME = 7;
+
 }

@@ -51,9 +51,6 @@
 		Name = #{name},
 		Domain =#{domain},
 		Charset = #{charset},
-		Status = #{status},
-		Times = #{times},
-		Interval_Time = #{intervalTime},
 		Update_Time = #{updateTime}
 		WHERE ID=#{id}
 	</update>
