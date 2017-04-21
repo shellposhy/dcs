@@ -14,6 +14,14 @@
 	<select id="findByUnitId" resultMap="resultMap" parameterType="java.lang.Integer">
 		SELECT * FROM crawl_content WHERE  Unit_ID=#{unitId}
 	</select>
+	
+	<select id="findPageByUnitId" resultMap="resultMap" parameterType="java.util.Map">
+		SELECT * FROM crawl_content WHERE  Unit_ID=#{unitId}  	limit #{firstSize}, #{size}
+	</select>
+	
+	<select id="countByUnitId" resultType="int" parameterType="java.lang.Integer">
+		SELECT COUNT(*) FROM crawl_content  WHERE  Unit_ID=#{unitId}
+	</select>
 
 	<select id="findAll" resultMap="resultMap">
 		SELECT * FROM crawl_content

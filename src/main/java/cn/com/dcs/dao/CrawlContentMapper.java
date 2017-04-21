@@ -22,4 +22,24 @@ public interface CrawlContentMapper extends BaseDao<CrawlContent> {
 	 * @return
 	 */
 	public List<CrawlContent> findByUnitId(@Param("unitId") Integer unitId);
+
+	/**
+	 * 分页查询站点
+	 * 
+	 * @param name
+	 * @param firstSize
+	 * @param size
+	 * @return
+	 */
+	public List<CrawlContent> findPageByUnitId(@Param("unitId") Integer unitId, @Param("firstSize") Integer firstSize,
+			@Param("size") Integer size);
+
+	/**
+	 * 统计站点数据
+	 * 
+	 * @param name
+	 * @return
+	 */
+	int countByUnitId(@Param("unitId") Integer unitId);
+
 }

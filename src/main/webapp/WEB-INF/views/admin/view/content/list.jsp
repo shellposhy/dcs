@@ -5,41 +5,33 @@
 		<div class="mt10">
 			<ul class="breadcrumb ind_f_tree" value="121">
 				<li><a href="${appPath}/admin" target="_self">${appName}</a> <span class="divider">/</span></li>
-				<li><a href="#">站点管理</a></li>
+				<li><a href="#">站点内容管理</a></li>
 			</ul>
 		</div>
 		<div class="padlrn span6 action_buttons">
 			<a class="btn" href="${appPath}/admin/site/new" target="_self"><i class="icon-plus"></i> 添加</a>
-			<a class="btn page_config" href="#" target="_self"><i class="icon-plus"></i> 抓取内容配置</a>
 			<a class="btn delete_list" href="#"><i class="icon-trash"></i> 删除</a>
+			<input type="hidden" id="siteId"  value="${siteId }">
 		</div>
-		<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered bootstrap-datatable trHoverEdit trHoverModi" id="site_list">
+		<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered bootstrap-datatable trHoverEdit trHoverModi" id="site_content_list">
 			<thead>
 				<tr>
 					<th><label class="checkbox inline"><input type="checkbox" class="selAll" />站点名称</label></th>
-					<th>站点域名</th>
-					<th>站点编码</th>
-					<th>抓取状态</th>
-					<th>抓取次数</th>
-					<th>抓取间隔</th>
-					<th>更新时间</th>
+					<th>类型</th>
+					<th>表达式</th>
 				</tr>
 			</thead>
 			<tbody>
 			</tbody>
 			<tfoot>
 				<tr>
-					<th>名称</th>
-					<th>站点域名</th>
-					<th>站点编码</th>
-					<th>抓取状态</th>
-					<th>抓取次数</th>
-					<th>抓取间隔</th>
-					<th>更新时间</th>
+					<th>站点名称</th>
+					<th>类型</th>
+					<th>表达式</th>
 				</tr>
 			</tfoot>
 		</table>
 	</div>
-	<script src="${appPath}/admin/jscript/site/site.js"></script>
+	<script src="${appPath}/admin/jscript/site/content.js"></script>
 </body>
 </html>

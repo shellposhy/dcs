@@ -16,6 +16,7 @@ public class CrawlUnit extends BaseEntity {
 	private String charset;
 	private ECrawlStatus status;
 	private Integer times;
+	private String startUrl;
 	private String subUrl;
 	private Integer intervalTime;
 
@@ -57,6 +58,14 @@ public class CrawlUnit extends BaseEntity {
 
 	public void setTimes(Integer times) {
 		this.times = times;
+	}
+
+	public String getStartUrl() {
+		return startUrl;
+	}
+
+	public void setStartUrl(String startUrl) {
+		this.startUrl = startUrl;
 	}
 
 	public String getSubUrl() {

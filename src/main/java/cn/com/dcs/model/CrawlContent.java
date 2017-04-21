@@ -1,6 +1,7 @@
 package cn.com.dcs.model;
 
 import cn.com.dcs.framework.base.BaseEntity;
+import cn.com.dcs.framework.base.constant.EPageContentType;
 
 /**
  * 抓取内容对象
@@ -11,7 +12,7 @@ import cn.com.dcs.framework.base.BaseEntity;
 public class CrawlContent extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	private Integer unitID;
-	private String type;
+	private EPageContentType type;
 	private String formula;
 	private String memo;
 
@@ -23,11 +24,11 @@ public class CrawlContent extends BaseEntity {
 		this.unitID = unitID;
 	}
 
-	public String getType() {
+	public EPageContentType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(EPageContentType type) {
 		this.type = type;
 	}
 

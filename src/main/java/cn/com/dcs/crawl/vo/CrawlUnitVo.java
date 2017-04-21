@@ -16,6 +16,8 @@ public class CrawlUnitVo {
 	private String charset;
 	private String status;
 	private Integer times;
+	private String startUrl;
+	private String subUrl;
 	private Integer intervalTime;
 	private String createTime;
 	private String updateTime;
@@ -34,6 +36,8 @@ public class CrawlUnitVo {
 		vo.setCharset(site.getCharset());
 		vo.setStatus(site.getStatus().getTitle());
 		vo.setTimes(site.getTimes());
+		vo.setStartUrl(site.getStartUrl());
+		vo.setSubUrl(site.getSubUrl());
 		vo.setIntervalTime(site.getIntervalTime());
 		vo.setCreateTime(DateTimeUtil.format(site.getCreateTime(), "yyyy-MM-dd"));
 		vo.setUpdateTime(DateTimeUtil.format(site.getUpdateTime(), "yyyy-MM-dd"));
@@ -86,6 +90,22 @@ public class CrawlUnitVo {
 
 	public void setTimes(Integer times) {
 		this.times = times;
+	}
+
+	public String getStartUrl() {
+		return startUrl;
+	}
+
+	public void setStartUrl(String startUrl) {
+		this.startUrl = startUrl;
+	}
+
+	public String getSubUrl() {
+		return subUrl;
+	}
+
+	public void setSubUrl(String subUrl) {
+		this.subUrl = subUrl;
 	}
 
 	public Integer getIntervalTime() {

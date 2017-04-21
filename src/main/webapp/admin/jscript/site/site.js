@@ -54,7 +54,38 @@ function init_site_data_list() {
 function site_list_call_back(){
 	docReady();
 	trHoverEdit();
-	listDelete("/admin/site/delete", dataTableSite); 
+	listDelete("/admin/site/delete", dataTableSite);
+	site_content_config(dataTableSite);
+}
+
+//page content crawl configuration
+function site_content_config(oTable){
+	$(".page_config").die().live('click',function(){
+		var dt = $(this).parent().nextAll(".dataTables_wrapper");
+		if (dt.length < 1) {
+			dt = $(this).parent().parent().nextAll(".dataTables_wrapper");
+		}
+		if (dt.find("table input[type='checkbox']").length > 0){
+			var count = 0;
+			var idsVal = new Array();
+			dt.find("table tbody input[type='checkbox']").each(function() {
+				if ($(this).attr("checked")&& $(this).val() != null&& $(this).val().length > 0) {
+					idsVal.push($(this).val());
+					count++;
+				}
+			});
+			if(count>0){
+				if(count>1){
+					noty({"text" : "请选择一个需要配置的站点！","layout" : "center","type" : "error"});
+				}else{
+					var sData = idsVal.join(",");
+					window.location.href="/admin/site/content/"+sData+"/list"
+				}
+			}else{
+				noty({"text" : "抓取内容配置前，请先选择需要配置的站点！","layout" : "center","type" : "error"});
+			}
+		}
+	})
 }
 
 //Validate the form value,not null
@@ -63,12 +94,16 @@ function site_form_validate(){
 		rules : {
 			name : {required : true},
 			domain : {required : true},
-			charset : {required : true}
+			charset : {required : true},
+			startUrl : {required : true},
+			subUrl : {required : true}
 		},
 		messages : {
 			name : {required : "站点名称不能为空！"},
 			domain : {required : "站点域名不能为空！"},
-			charset : {required : "站点编码不能为空！"}
+			charset : {required : "站点编码不能为空！"},
+			startUrl : {required : "抓取起始页不能为空！"},
+			subUrl : {required : "站点子链表达式不能为空！"}
 		},
 		errorPlacement : function(error, element) {
 			error.insertAfter(element);
