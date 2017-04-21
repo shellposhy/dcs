@@ -21,5 +21,5 @@ public interface CrawlContentMapper extends BaseDao<CrawlContent> {
 	 * @param siteId
 	 * @return
 	 */
-	public List<CrawlContent> findBySiteId(@Param("siteId") Integer siteId);
+	public List<CrawlContent> findByUnitId(@Param("unitId") Integer unitId);
 }

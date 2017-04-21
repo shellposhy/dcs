@@ -1,11 +1,13 @@
-package cn.com.dcs.util;
+package cn.com.dcs.crawl.util;
+
+import javax.management.JMException;
 
 import cn.com.dcs.crawl.constant.PageField;
 import cn.com.dcs.crawl.pipeline.TextFilePipeline;
-import cn.com.dcs.crawl.util.PageUtil;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.monitor.SpiderMonitor;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 public class CrawlTest implements PageProcessor {
@@ -30,9 +32,11 @@ public class CrawlTest implements PageProcessor {
 		page.addTargetRequests(page.getHtml().links().regex("([a-zA-z]+://*.+news.sina.com.cn+[^\\s]*)").all());
 	}
 
-	public static void main(String[] args) {
-		Spider.create(new CrawlTest()).addUrl("http://news.sina.com.cn")
-				.addPipeline(new TextFilePipeline("d:\\dcs\\txt")).thread(5).run();
+	public static void main(String[] args) throws JMException {
+		Spider sina = Spider.create(new CrawlTest()).addUrl("http://news.sina.com.cn")
+				.addPipeline(new TextFilePipeline("d:\\dcs\\txt")).thread(5);
+		SpiderMonitor.instance().register(sina);
+		sina.run();
 	}
 
 }

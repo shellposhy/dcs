@@ -71,7 +71,6 @@ public class TextFilePipeline extends FilePersistentBase implements Pipeline {
 					break;
 				}
 			}
-			System.out.println("content==========" + value);
 			if (null != value && !"".equals(value)) {
 				return false;
 			}

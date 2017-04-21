@@ -10,6 +10,7 @@
 		<result property="charset" column="Charset" />
 		<result property="status" column="Status" />
 		<result property="times" column="Times" />
+		<result property="subUrl" column="Sub_Url" />
 		<result property="intervalTime" column="Interval_Time" />
 		<result property="updateTime" column="Update_Time" />
 		<result property="createTime" column="Create_Time" />
@@ -42,8 +43,8 @@
 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO crawl_unit(Name,Domain,Charset,Status,Times,Interval_Time,Update_Time,Create_Time)
-		VALUES(#{name},#{domain},#{charset},#{status},#{times},#{intervalTime},#{updateTime},#{createTime})
+		INSERT INTO crawl_unit(Name,Domain,Charset,Status,Times,Sub_Url,Interval_Time,Update_Time,Create_Time)
+		VALUES(#{name},#{domain},#{charset},#{status},#{times},#{subUrl},#{intervalTime},#{updateTime},#{createTime})
 	</insert>
 
 	<update id="update">
@@ -51,6 +52,7 @@
 		Name = #{name},
 		Domain =#{domain},
 		Charset = #{charset},
+		Sub_Url=#{subUrl},
 		Update_Time = #{updateTime}
 		WHERE ID=#{id}
 	</update>

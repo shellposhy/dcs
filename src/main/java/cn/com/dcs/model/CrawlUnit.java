@@ -16,6 +16,7 @@ public class CrawlUnit extends BaseEntity {
 	private String charset;
 	private ECrawlStatus status;
 	private Integer times;
+	private String subUrl;
 	private Integer intervalTime;
 
 	public String getName() {
@@ -56,6 +57,14 @@ public class CrawlUnit extends BaseEntity {
 
 	public void setTimes(Integer times) {
 		this.times = times;
+	}
+
+	public String getSubUrl() {
+		return subUrl;
+	}
+
+	public void setSubUrl(String subUrl) {
+		this.subUrl = subUrl;
 	}
 
 	public Integer getIntervalTime() {

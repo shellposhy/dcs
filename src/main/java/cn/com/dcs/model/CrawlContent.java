@@ -1,7 +1,6 @@
 package cn.com.dcs.model;
 
 import cn.com.dcs.framework.base.BaseEntity;
-import cn.com.dcs.framework.base.constant.ECrawlStatus;
 
 /**
  * 抓取内容对象
@@ -11,35 +10,25 @@ import cn.com.dcs.framework.base.constant.ECrawlStatus;
  */
 public class CrawlContent extends BaseEntity {
 	private static final long serialVersionUID = 1L;
-	private Integer linkID;
-	private String name;
-	private String code;
+	private Integer unitID;
+	private String type;
 	private String formula;
-	private ECrawlStatus status;
-	private String savePath;
+	private String memo;
 
-	public Integer getLinkID() {
-		return linkID;
+	public Integer getUnitID() {
+		return unitID;
 	}
 
-	public void setLinkID(Integer linkID) {
-		this.linkID = linkID;
+	public void setUnitID(Integer unitID) {
+		this.unitID = unitID;
 	}
 
-	public String getName() {
-		return name;
+	public String getType() {
+		return type;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getFormula() {
@@ -50,19 +39,12 @@ public class CrawlContent extends BaseEntity {
 		this.formula = formula;
 	}
 
-	public ECrawlStatus getStatus() {
-		return status;
+	public String getMemo() {
+		return memo;
 	}
 
-	public void setStatus(ECrawlStatus status) {
-		this.status = status;
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 
-	public String getSavePath() {
-		return savePath;
-	}
-
-	public void setSavePath(String savePath) {
-		this.savePath = savePath;
-	}
 }

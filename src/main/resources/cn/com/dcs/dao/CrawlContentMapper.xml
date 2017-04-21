@@ -5,16 +5,14 @@
 <mapper namespace="cn.com.dcs.dao.CrawlContentMapper">
 	<resultMap id="resultMap" type="cn.com.dcs.model.CrawlContent">
 		<result property="id" column="ID" />
-		<result property="linkID" column="Link_ID" />
-		<result property="name" column="Name" />
-		<result property="code" column="Code" />
+		<result property="unitID" column="Unit_ID" />
+		<result property="type" column="Type" />
 		<result property="formula" column="Formula" />
-		<result property="status" column="Status" />
-		<result property="savePath" column="Save_Path" />
+		<result property="memo" column="Memo" />
 	</resultMap>
 	
-	<select id="findBySiteId" resultMap="resultMap" parameterType="java.lang.Integer">
-		SELECT * FROM crawl_content c WHERE  c.Link_ID IN(SELECT l.ID FROM crawl_link l WHER l.Unit_ID=#{siteId})
+	<select id="findByUnitId" resultMap="resultMap" parameterType="java.lang.Integer">
+		SELECT * FROM crawl_content WHERE  Unit_ID=#{unitId}
 	</select>
 
 	<select id="findAll" resultMap="resultMap">
@@ -29,18 +27,16 @@
 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO crawl_content(Link_ID,Name,Code,Formula,Status,Save_Path)
-		VALUES(#{linkID},#{name},#{code},#{formula},#{status},#{savePath})
+		INSERT INTO crawl_content(Unit_ID,Type,Formula,Memo)
+		VALUES(#{unitID},#{type},#{formula},#{memo})
 	</insert>
 
 	<update id="update">
 		UPDATE crawl_content SET
-		Link_ID = #{linkID},
-		Name =#{name},
-		Code = #{code},
+		Unit_ID = #{unitID},
+		Type =#{type},
 		Formula = #{formula},
-		Status = #{status},
-		Save_Path = #{savePath}
+		Memo = #{memo}
 		WHERE ID=#{id}
 	</update>
 
