@@ -1,6 +1,8 @@
 package cn.com.dcs.util;
 
+import cn.com.dcs.crawl.constant.PageField;
 import cn.com.dcs.crawl.pipeline.TextFilePipeline;
+import cn.com.dcs.crawl.util.PageUtil;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -16,11 +18,15 @@ public class CrawlTest implements PageProcessor {
 
 	public void process(Page page) {
 		site.setCharset(PageUtil.pageDefaultCharset(page.getHtml()));
-		page.putField("title", page.getHtml().xpath("//title"));
-		page.putField("keywords", page.getHtml().xpath("//meta[@name='keywords']"));
-		page.putField("tags", page.getHtml().xpath("//meta[@name='tags']"));
-		page.putField("summary", page.getHtml().xpath("//meta[@name='description']"));
-		page.putField("content", page.getHtml().regex("(<div class=\"article.*)"));
+		page.putField(PageField.TITLE, page.getHtml().xpath("//title"));
+		page.putField(PageField.KEYWORD, page.getHtml().xpath("//meta[@name='keywords']"));
+		page.putField(PageField.TAGS, page.getHtml().xpath("//meta[@name='tags']"));
+		page.putField(PageField.SUMMARY, page.getHtml().xpath("//meta[@name='description']"));
+		String content = page.getHtml().css("div.article-a__content").get();
+		if (null == content || "".equals(content)) {
+			content = page.getHtml().css("div.article").get();
+		}
+		page.putField(PageField.CONTENT, content);
 		page.addTargetRequests(page.getHtml().links().regex("([a-zA-z]+://*.+news.sina.com.cn+[^\\s]*)").all());
 	}
 

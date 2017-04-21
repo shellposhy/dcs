@@ -27,11 +27,11 @@ import cn.com.dcs.base.common.BaseMappingJsonView;
 import cn.com.dcs.base.common.DataTablesVo;
 import cn.com.dcs.base.common.JsonPara;
 import cn.com.dcs.base.common.SystemConstant;
+import cn.com.dcs.crawl.vo.CrawlUnitVo;
 import cn.com.dcs.framework.base.Result;
 import cn.com.dcs.framework.base.constant.ECrawlStatus;
 import cn.com.dcs.model.CrawlUnit;
 import cn.com.dcs.service.CrawlUnitService;
-import cn.com.dcs.vo.CrawlUnitVo;
 
 /**
  * 站点管理控制类

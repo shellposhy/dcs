@@ -1,4 +1,4 @@
-package cn.com.dcs.vo;
+package cn.com.dcs.crawl.vo;
 
 import cn.com.dcs.model.CrawlUnit;
 import cn.com.people.data.util.DateTimeUtil;
