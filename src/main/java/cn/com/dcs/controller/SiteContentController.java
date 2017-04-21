@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +36,7 @@ import cn.com.dcs.service.CrawlUnitService;
 @Controller
 @RequestMapping("/admin/site/content")
 public class SiteContentController extends BaseController {
+	private Logger log = Logger.getLogger(SiteContentController.class.getName());
 
 	@Resource
 	private CrawlContentService crawlContentService;
@@ -43,14 +45,26 @@ public class SiteContentController extends BaseController {
 	@Resource
 	private AppConfig appConfig;
 
+	@RequestMapping
+	public String preList() {
+		log.debug("======site.content.pre.list======");
+		List<CrawlUnit> result = crawlUnitService.findAll();
+		if (null != result && result.size() > 0) {
+			return "redirect:/admin/site/content/" + result.get(0).getId() + "/list";
+		}
+		return "/admin/site/new";
+	}
+
 	@RequestMapping("/{siteId}/list")
 	public String list(@PathVariable Integer siteId, Model model) {
+		log.debug("======site.content.list======");
 		model.addAttribute("siteId", siteId);
 		return "/admin/view/content/list";
 	}
 
 	@RequestMapping("/{siteId}/s")
 	public MappingJacksonJsonView search(@PathVariable Integer siteId, @RequestBody JsonPara[] jsonParas) {
+		log.debug("======site.content.search======");
 		MappingJacksonJsonView mv = new BaseMappingJsonView();
 		Map<String, String> jsons = JsonPara.getParaMap(jsonParas);
 		int sEcho = Integer.parseInt(jsons.get(JsonPara.DataTablesParaNames.sEcho));

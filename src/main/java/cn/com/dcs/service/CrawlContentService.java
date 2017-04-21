@@ -16,6 +16,55 @@ public class CrawlContentService {
 	private CrawlContentMapper crawlContentMapper;
 
 	/**
+	 * 查询全部
+	 * 
+	 * @return
+	 */
+	public List<CrawlContent> findAll() {
+		return crawlContentMapper.findAll();
+	}
+
+	/**
+	 * 主键查询
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public CrawlContent find(Integer id) {
+		return crawlContentMapper.find(id);
+	}
+
+	/**
+	 * 新增数据
+	 * 
+	 * @param site
+	 * @return
+	 */
+	public void insert(CrawlContent content) {
+		crawlContentMapper.insert(content);
+	}
+
+	/**
+	 * 更新数据
+	 * 
+	 * @param site
+	 * @return
+	 */
+	public void update(CrawlContent content) {
+		crawlContentMapper.update(content);
+	}
+
+	/**
+	 * 删除数据
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public void delete(Integer id) {
+		crawlContentMapper.delete(id);
+	}
+
+	/**
 	 * 分页查询数据组装
 	 * 
 	 * @param unitId

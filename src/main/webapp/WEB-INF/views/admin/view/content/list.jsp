@@ -3,7 +3,7 @@
 <body>
 	<div id="content" class="span12">
 		<div class="mt10">
-			<ul class="breadcrumb ind_f_tree" value="121">
+			<ul class="breadcrumb ind_f_tree" value="122">
 				<li><a href="${appPath}/admin" target="_self">${appName}</a> <span class="divider">/</span></li>
 				<li><a href="#">站点内容管理</a></li>
 			</ul>
