@@ -28,6 +28,15 @@
 					</div>
 				</div>
 				<div class="control-group">
+					<label class="control-label" for="formulaType">表达式类型</label>
+					<div class="controls">
+						<form:select path="formulaType" id="formulaType" name="formulaType">
+							<form:options items="${formulaTypes}" itemLabel="title" />
+						</form:select>
+						<label class="error"><form:errors path="formulaType" cssClass="error" /> </label>
+					</div>
+				</div>
+				<div class="control-group">
 					<label class="control-label" for="formula">提取表达式</label>
 					<div class="controls">
 						<form:input path="formula" name="formula" class="typeahead" id="formula" />

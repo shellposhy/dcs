@@ -21,9 +21,9 @@ public class CrawlTest implements PageProcessor {
 	public void process(Page page) {
 		site.setCharset(PageUtil.pageDefaultCharset(page.getHtml()));
 		page.putField(PageField.TITLE, page.getHtml().xpath("//title"));
-		page.putField(PageField.KEYWORD, page.getHtml().xpath("//meta[@name='keywords']"));
-		page.putField(PageField.TAGS, page.getHtml().xpath("//meta[@name='tags']"));
-		page.putField(PageField.SUMMARY, page.getHtml().xpath("//meta[@name='description']"));
+		page.putField(PageField.KEYWORD, page.getHtml().xpath("//meta[@name=keywords]"));
+		page.putField(PageField.TAGS, page.getHtml().xpath("//meta[@name=tags]"));
+		page.putField(PageField.SUMMARY, page.getHtml().xpath("//meta[@name=description]"));
 		String content = page.getHtml().css("div.article-a__content").get();
 		if (null == content || "".equals(content)) {
 			content = page.getHtml().css("div.article").get();

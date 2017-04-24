@@ -7,6 +7,7 @@
 		<result property="id" column="ID" />
 		<result property="unitID" column="Unit_ID" />
 		<result property="type" column="Type" />
+		<result property="formulaType" column="Formula_Type" />
 		<result property="formula" column="Formula" />
 		<result property="memo" column="Memo" />
 	</resultMap>
@@ -35,14 +36,15 @@
 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO crawl_content(Unit_ID,Type,Formula,Memo)
-		VALUES(#{unitID},#{type},#{formula},#{memo})
+		INSERT INTO crawl_content(Unit_ID,Type,Formula_Type,Formula,Memo)
+		VALUES(#{unitID},#{type},#{formulaType},#{formula},#{memo})
 	</insert>
 
 	<update id="update">
 		UPDATE crawl_content SET
 		Unit_ID = #{unitID},
 		Type =#{type},
+		Formula_Type=#{formulaType},
 		Formula = #{formula},
 		Memo = #{memo}
 		WHERE ID=#{id}

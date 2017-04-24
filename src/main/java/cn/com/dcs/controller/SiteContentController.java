@@ -27,6 +27,7 @@ import cn.com.dcs.base.common.DataTablesVo;
 import cn.com.dcs.base.common.JsonPara;
 import cn.com.dcs.crawl.vo.CrawlContentVo;
 import cn.com.dcs.framework.base.Result;
+import cn.com.dcs.framework.base.constant.EFormulaType;
 import cn.com.dcs.framework.base.constant.EPageContentType;
 import cn.com.dcs.model.CrawlContent;
 import cn.com.dcs.model.CrawlUnit;
@@ -75,6 +76,7 @@ public class SiteContentController extends BaseController {
 		crawlContent.setUnitID(siteId);
 		model.addAttribute("crawlContent", crawlContent);
 		model.addAttribute("contentType", EPageContentType.values());
+		model.addAttribute("formulaTypes", EFormulaType.values());
 		return "/admin/view/content/edit";
 	}
 
@@ -84,6 +86,7 @@ public class SiteContentController extends BaseController {
 		CrawlContent crawlContent = crawlContentService.find(id);
 		model.addAttribute("crawlContent", crawlContent);
 		model.addAttribute("contentType", EPageContentType.values());
+		model.addAttribute("formulaTypes", EFormulaType.values());
 		return "/admin/view/content/edit";
 	}
 

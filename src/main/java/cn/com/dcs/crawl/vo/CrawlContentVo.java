@@ -12,6 +12,7 @@ public class CrawlContentVo {
 	private Integer id;
 	private Integer unitID;
 	private String type;
+	private String formulaType;
 	private String formula;
 	private String memo;
 	// 扩展属性
@@ -28,6 +29,7 @@ public class CrawlContentVo {
 		vo.setId(content.getId());
 		vo.setUnitID(content.getUnitID());
 		vo.setType(content.getType().getTitle());
+		vo.setFormulaType(content.getFormulaType().getTitle());
 		vo.setFormula(content.getFormula());
 		vo.setMemo(content.getMemo());
 		vo.setUnitName(unitName);
@@ -56,6 +58,14 @@ public class CrawlContentVo {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getFormulaType() {
+		return formulaType;
+	}
+
+	public void setFormulaType(String formulaType) {
+		this.formulaType = formulaType;
 	}
 
 	public String getFormula() {

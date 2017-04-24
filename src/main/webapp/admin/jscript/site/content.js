@@ -37,6 +37,7 @@ function init_content_data_list() {
 						}
 			        },
 					{"mData" : "type"}, 
+					{"mData" : "formulaType"}, 
 					{"mData" : "formula"}
 				],
 			"fnDrawCallback" : content_list_call_back

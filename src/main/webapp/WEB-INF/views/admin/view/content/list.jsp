@@ -18,6 +18,7 @@
 				<tr>
 					<th><label class="checkbox inline"><input type="checkbox" class="selAll" />站点名称</label></th>
 					<th>类型</th>
+					<th>表达式类型</th>
 					<th>表达式</th>
 				</tr>
 			</thead>
@@ -27,6 +28,7 @@
 				<tr>
 					<th>站点名称</th>
 					<th>类型</th>
+					<th>表达式类型</th>
 					<th>表达式</th>
 				</tr>
 			</tfoot>
