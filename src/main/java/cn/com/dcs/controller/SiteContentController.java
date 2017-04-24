@@ -4,24 +4,30 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import com.google.common.collect.Lists;
 
 import cn.com.dcs.base.AppConfig;
 import cn.com.dcs.base.BaseController;
+import cn.com.dcs.base.ControllerOperator;
 import cn.com.dcs.base.common.BaseMappingJsonView;
 import cn.com.dcs.base.common.DataTablesVo;
 import cn.com.dcs.base.common.JsonPara;
 import cn.com.dcs.crawl.vo.CrawlContentVo;
 import cn.com.dcs.framework.base.Result;
+import cn.com.dcs.framework.base.constant.EPageContentType;
 import cn.com.dcs.model.CrawlContent;
 import cn.com.dcs.model.CrawlUnit;
 import cn.com.dcs.service.CrawlContentService;
@@ -62,6 +68,25 @@ public class SiteContentController extends BaseController {
 		return "/admin/view/content/list";
 	}
 
+	@RequestMapping("/{siteId}/new")
+	public String preNew(@PathVariable Integer siteId, Model model) {
+		log.debug("======site.content.new======");
+		CrawlContent crawlContent = new CrawlContent();
+		crawlContent.setUnitID(siteId);
+		model.addAttribute("crawlContent", crawlContent);
+		model.addAttribute("contentType", EPageContentType.values());
+		return "/admin/view/content/edit";
+	}
+
+	@RequestMapping("/{id}/edit")
+	public String edit(@PathVariable Integer id, Model model) {
+		log.debug("======site.content.edit======");
+		CrawlContent crawlContent = crawlContentService.find(id);
+		model.addAttribute("crawlContent", crawlContent);
+		model.addAttribute("contentType", EPageContentType.values());
+		return "/admin/view/content/edit";
+	}
+
 	@RequestMapping("/{siteId}/s")
 	public MappingJacksonJsonView search(@PathVariable Integer siteId, @RequestBody JsonPara[] jsonParas) {
 		log.debug("======site.content.search======");
@@ -87,5 +112,34 @@ public class SiteContentController extends BaseController {
 		}
 		mv.addStaticAttribute("dataTablesVo", dataTablesVo);
 		return mv;
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public String save(@Valid final CrawlContent content, BindingResult result, final Model model,
+			final HttpServletRequest request) {
+		log.debug("======site.content.save======");
+		return super.save(content, result, model, new ControllerOperator() {
+			public void operate() {
+				if (null != content.getId() && content.getId().intValue() > 0) {
+					crawlContentService.update(content);
+				} else {
+					crawlContentService.insert(content);
+				}
+			}
+
+			public void onFailure() {
+			}
+
+			public String getSuccessView() {
+				return "redirect:/admin/site/content/" + content.getUnitID() + "/list";
+			}
+
+			public String getFailureView() {
+				if (null != content.getId()) {
+					return "redirect:/admin/site/content/" + content.getId() + "/edit";
+				}
+				return "redirect:/admin/site/content/" + content.getUnitID() + "/new";
+			}
+		});
 	}
 }

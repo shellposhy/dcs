@@ -9,9 +9,9 @@
 			</ul>
 		</div>
 		<div class="padlrn span6 action_buttons">
-			<a class="btn" href="${appPath}/admin/site/new" target="_self"><i class="icon-plus"></i> 添加</a>
+			<a class="btn" href="${appPath}/admin/site/content/${siteId}/new" target="_self"><i class="icon-plus"></i> 添加</a>
 			<a class="btn delete_list" href="#"><i class="icon-trash"></i> 删除</a>
-			<input type="hidden" id="siteId"  value="${siteId }">
+			<input type="hidden" id="siteId"  value="${siteId}">
 		</div>
 		<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered bootstrap-datatable trHoverEdit trHoverModi" id="site_content_list">
 			<thead>
