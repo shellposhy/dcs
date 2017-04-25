@@ -1,5 +1,9 @@
 package cn.com.dcs.model;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import cn.com.dcs.framework.base.BaseEntity;
 import cn.com.dcs.framework.base.constant.EFormulaType;
 import cn.com.dcs.framework.base.constant.EPageContentType;
@@ -17,6 +21,19 @@ public class CrawlContent extends BaseEntity {
 	private EFormulaType formulaType;
 	private String formula;
 	private String memo;
+
+	public static List<CrawlContent> staticContentList(List<CrawlContent> pageFields, EPageContentType type) {
+		if (null != pageFields && pageFields.size() > 0) {
+			List<CrawlContent> result = Lists.newArrayList();
+			for (CrawlContent content : pageFields) {
+				if (type == content.getType()) {
+					result.add(content);
+				}
+			}
+			return result;
+		}
+		return null;
+	}
 
 	public Integer getUnitID() {
 		return unitID;
