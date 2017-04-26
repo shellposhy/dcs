@@ -1,4 +1,4 @@
-package cn.com.dcs.crawl.model;
+package cn.com.dcs.crawl.processor;
 
 import java.util.List;
 
