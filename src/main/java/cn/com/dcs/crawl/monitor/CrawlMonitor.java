@@ -24,6 +24,12 @@ import us.codecraft.webmagic.SpiderListener;
 import us.codecraft.webmagic.utils.Experimental;
 import us.codecraft.webmagic.utils.UrlUtils;
 
+/**
+ * 爬虫监控类
+ * 
+ * @author shishb
+ * @version 1.0
+ */
 @Experimental
 public class CrawlMonitor {
 	private static CrawlMonitor INSTANCE = new CrawlMonitor();

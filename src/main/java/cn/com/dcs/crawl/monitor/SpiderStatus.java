@@ -9,8 +9,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author code4crafer@gmail.com
- * @since 0.5.0
+ * 
+ * 爬虫状态类
+ * 
+ * @author shishb
+ * @version 1.0
  */
 public class SpiderStatus implements SpiderStatusMXBean {
 

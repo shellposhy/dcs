@@ -12,6 +12,7 @@ import cn.com.dcs.base.AppConfig;
 import cn.com.dcs.crawl.monitor.CrawlMonitor;
 import cn.com.dcs.crawl.pipeline.TextFilePipeline;
 import cn.com.dcs.crawl.processor.CrawlPageProcessor;
+import cn.com.dcs.framework.base.constant.ECrawlStatus;
 import cn.com.dcs.model.CrawlContent;
 import cn.com.dcs.model.CrawlUnit;
 import us.codecraft.webmagic.Site;
@@ -50,20 +51,21 @@ public class CrawlService {
 	/**
 	 * 爬虫开始抓取页面
 	 */
-	public void start() {
-		List<CrawlUnit> siteList = unitService.findAll();
-		if (null != siteList && siteList.size() > 0) {
-			for (CrawlUnit webSite : siteList) {
-				Site site = Site.me().setDomain(webSite.getDomain()).setRetryTimes(1);
-				List<CrawlContent> siteFields = contentService.findByUnitId(webSite.getId());
-				CrawlPageProcessor processor = new CrawlPageProcessor(site, webSite, siteFields);
-				Spider spider = Spider.create(processor).addUrl(webSite.getStartUrl())
-						.addPipeline(new TextFilePipeline("d:\\dcs\\txt")).thread(5);
-				try {
-					monitor.register(spider);
-				} catch (JMException e) {
-					e.printStackTrace();
-				}
+	public void start(Integer siteId) {
+		CrawlUnit crawlsite = unitService.find(siteId);
+		if (null != crawlsite && crawlsite.getId().intValue() > 0) {
+			Site site = Site.me().setDomain(crawlsite.getDomain()).setRetryTimes(1).setSleepTime(1000).setTimeOut(5000);
+			List<CrawlContent> siteFields = contentService.findByUnitId(crawlsite.getId());
+			CrawlPageProcessor processor = new CrawlPageProcessor(site, crawlsite, siteFields);
+			Spider spider = Spider.create(processor).addUrl(crawlsite.getStartUrl())
+					.addPipeline(new TextFilePipeline("d:\\dcs\\txt")).thread(5);
+			try {
+				monitor.register(spider);
+				spider.run();
+				crawlsite.setStatus(ECrawlStatus.Starting);
+				unitService.update(crawlsite);
+			} catch (JMException e) {
+				e.printStackTrace();
 			}
 		}
 	}

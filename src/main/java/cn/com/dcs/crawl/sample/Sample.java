@@ -1,16 +1,17 @@
-package cn.com.dcs.crawl.util;
+package cn.com.dcs.crawl.sample;
 
 import javax.management.JMException;
 
 import cn.com.dcs.crawl.constant.PageField;
 import cn.com.dcs.crawl.pipeline.TextFilePipeline;
+import cn.com.dcs.crawl.util.PageUtil;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.monitor.SpiderMonitor;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-public class CrawlTest implements PageProcessor {
+public class Sample implements PageProcessor {
 
 	private Site site = Site.me().setDomain("sina.com.cn").setRetryTimes(1).setSleepTime(1000).setTimeOut(5000);
 
@@ -33,7 +34,7 @@ public class CrawlTest implements PageProcessor {
 	}
 
 	public static void main(String[] args) throws JMException {
-		Spider sina = Spider.create(new CrawlTest()).addUrl("http://news.sina.com.cn")
+		Spider sina = Spider.create(new Sample()).addUrl("http://news.sina.com.cn")
 				.addPipeline(new TextFilePipeline("d:\\dcs\\txt")).thread(5);
 		SpiderMonitor.instance().register(sina);
 		sina.run();

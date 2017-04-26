@@ -2,6 +2,8 @@ package cn.com.dcs.crawl.processor;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.google.common.base.Strings;
 
 import cn.com.dcs.crawl.constant.PageField;
@@ -18,6 +20,7 @@ import us.codecraft.webmagic.selector.Selectable;
  * 通用爬虫页面处理类
  */
 public class CrawlPageProcessor implements PageProcessor {
+	private Logger log = Logger.getLogger(CrawlPageProcessor.class.getName());
 	// attribute definition
 	private Site site;
 	private CrawlUnit unit;
@@ -37,6 +40,7 @@ public class CrawlPageProcessor implements PageProcessor {
 	 * @return
 	 */
 	public void process(Page page) {
+		log.debug("====crawl.process=====");
 		if (null != siteFields && siteFields.size() > 0) {
 			// Encoding Settings
 			site.setCharset(PageUtil.pageDefaultCharset(page.getHtml()));
@@ -53,12 +57,13 @@ public class CrawlPageProcessor implements PageProcessor {
 						for (CrawlContent content : result) {
 							String value = getPageSelectable(content, page).get();
 							if (!Strings.isNullOrEmpty(value)) {
-								page.putField(PageField.getContentFieldName(result.get(0).getType()),
+								page.putField(PageField.getContentFieldName(content.getType()),
 										getPageSelectable(content, page));
 								break;
 							}
 						}
 					}
+
 				}
 			}
 			// Get the current page all other url
