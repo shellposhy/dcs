@@ -1,11 +1,21 @@
 package cn.com.dcs.service;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.management.JMException;
 
 import org.springframework.stereotype.Service;
 
+import cn.com.dcs.base.AppConfig;
 import cn.com.dcs.crawl.monitor.CrawlMonitor;
+import cn.com.dcs.crawl.pipeline.TextFilePipeline;
+import cn.com.dcs.crawl.processor.CrawlPageProcessor;
+import cn.com.dcs.model.CrawlContent;
+import cn.com.dcs.model.CrawlUnit;
+import us.codecraft.webmagic.Site;
+import us.codecraft.webmagic.Spider;
 
 /**
  * 爬虫服务类
@@ -17,7 +27,8 @@ import cn.com.dcs.crawl.monitor.CrawlMonitor;
 public class CrawlService {
 
 	private static CrawlMonitor monitor = null;
-
+	@Resource
+	private AppConfig appConfig;
 	@Resource
 	private CrawlUnitService unitService;
 	@Resource
@@ -37,7 +48,28 @@ public class CrawlService {
 	}
 
 	/**
-	 * 监控爬虫，并返回爬虫状态
+	 * 爬虫开始抓取页面
+	 */
+	public void start() {
+		List<CrawlUnit> siteList = unitService.findAll();
+		if (null != siteList && siteList.size() > 0) {
+			for (CrawlUnit webSite : siteList) {
+				Site site = Site.me().setDomain(webSite.getDomain()).setRetryTimes(1);
+				List<CrawlContent> siteFields = contentService.findByUnitId(webSite.getId());
+				CrawlPageProcessor processor = new CrawlPageProcessor(site, webSite, siteFields);
+				Spider spider = Spider.create(processor).addUrl(webSite.getStartUrl())
+						.addPipeline(new TextFilePipeline("d:\\dcs\\txt")).thread(5);
+				try {
+					monitor.register(spider);
+				} catch (JMException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	/**
+	 * 爬虫监控
 	 * 
 	 * @return
 	 */

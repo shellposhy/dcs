@@ -36,7 +36,7 @@ public class CrawlMonitor {
 	private List<SpiderStatusMXBean> spiderStatuses = new ArrayList<SpiderStatusMXBean>();
 
 	protected CrawlMonitor() {
-		jmxServerName = "WebMagic";
+		jmxServerName = "WisdomSpider";
 		mbeanServer = ManagementFactory.getPlatformMBeanServer();
 	}
 
@@ -72,6 +72,10 @@ public class CrawlMonitor {
 
 	public static CrawlMonitor instance() {
 		return INSTANCE;
+	}
+
+	public List<SpiderStatusMXBean> getSpiderStatuses() {
+		return spiderStatuses;
 	}
 
 	public class MonitorSpiderListener implements SpiderListener {
