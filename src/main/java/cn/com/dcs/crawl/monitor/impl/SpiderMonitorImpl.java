@@ -1,7 +1,10 @@
-package cn.com.dcs.crawl.monitor;
+package cn.com.dcs.crawl.monitor.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import cn.com.dcs.crawl.monitor.CrawlMonitor;
+import cn.com.dcs.crawl.monitor.SpiderMonitor;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.scheduler.MonitorableScheduler;
 
@@ -15,7 +18,7 @@ import java.util.List;
  * @author shishb
  * @version 1.0
  */
-public class SpiderStatus implements SpiderStatusMXBean {
+public class SpiderMonitorImpl implements SpiderMonitor {
 
 	protected final Spider spider;
 
@@ -23,7 +26,7 @@ public class SpiderStatus implements SpiderStatusMXBean {
 
 	protected final CrawlMonitor.MonitorSpiderListener monitorSpiderListener;
 
-	public SpiderStatus(Spider spider, CrawlMonitor.MonitorSpiderListener monitorSpiderListener) {
+	public SpiderMonitorImpl(Spider spider, CrawlMonitor.MonitorSpiderListener monitorSpiderListener) {
 		this.spider = spider;
 		this.monitorSpiderListener = monitorSpiderListener;
 	}

@@ -18,6 +18,7 @@ import javax.management.ObjectName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.com.dcs.crawl.monitor.impl.SpiderMonitorImpl;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.SpiderListener;
@@ -39,7 +40,7 @@ public class CrawlMonitor {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	private MBeanServer mbeanServer;
 	private String jmxServerName;
-	private List<SpiderStatusMXBean> spiderStatuses = new ArrayList<SpiderStatusMXBean>();
+	private List<SpiderMonitor> spiderStatuses = new ArrayList<SpiderMonitor>();
 
 	protected CrawlMonitor() {
 		jmxServerName = "WisdomSpider";
@@ -65,22 +66,22 @@ public class CrawlMonitor {
 			} else {
 				spider.getSpiderListeners().add(monitorSpiderListener);
 			}
-			SpiderStatusMXBean spiderStatusMBean = getSpiderStatusMBean(spider, monitorSpiderListener);
+			SpiderMonitor spiderStatusMBean = getSpiderStatusMonitor(spider, monitorSpiderListener);
 			registerMBean(spiderStatusMBean);
 			spiderStatuses.add(spiderStatusMBean);
 		}
 		return this;
 	}
 
-	protected SpiderStatusMXBean getSpiderStatusMBean(Spider spider, MonitorSpiderListener monitorSpiderListener) {
-		return new SpiderStatus(spider, monitorSpiderListener);
+	protected SpiderMonitor getSpiderStatusMonitor(Spider spider, MonitorSpiderListener monitorSpiderListener) {
+		return new SpiderMonitorImpl(spider, monitorSpiderListener);
 	}
 
 	public static CrawlMonitor instance() {
 		return INSTANCE;
 	}
 
-	public List<SpiderStatusMXBean> getSpiderStatuses() {
+	public List<SpiderMonitor> getSpiderStatuses() {
 		return spiderStatuses;
 	}
 
@@ -116,7 +117,7 @@ public class CrawlMonitor {
 		}
 	}
 
-	protected void registerMBean(SpiderStatusMXBean spiderStatus) throws MalformedObjectNameException,
+	protected void registerMBean(SpiderMonitor spiderStatus) throws MalformedObjectNameException,
 			InstanceAlreadyExistsException, MBeanRegistrationException, NotCompliantMBeanException {
 		ObjectName objName = new ObjectName(jmxServerName + ":name=" + UrlUtils.removePort(spiderStatus.getName()));
 		mbeanServer.registerMBean(spiderStatus, objName);

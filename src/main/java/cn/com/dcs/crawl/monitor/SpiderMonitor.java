@@ -9,7 +9,7 @@ import java.util.List;
  * @author shishb
  * @version 1.0
  */
-public interface SpiderStatusMXBean {
+public interface SpiderMonitor {
 
 	public String getName();
 
