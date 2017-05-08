@@ -67,7 +67,7 @@ public class CrawlMonitor {
 				spider.getSpiderListeners().add(monitorSpiderListener);
 			}
 			SpiderMonitor spiderStatusMBean = getSpiderStatusMonitor(spider, monitorSpiderListener);
-			registerMBean(spiderStatusMBean);
+			register(spiderStatusMBean);
 			spiderStatuses.add(spiderStatusMBean);
 		}
 		return this;
@@ -117,7 +117,7 @@ public class CrawlMonitor {
 		}
 	}
 
-	protected void registerMBean(SpiderMonitor spiderStatus) throws MalformedObjectNameException,
+	protected void register(SpiderMonitor spiderStatus) throws MalformedObjectNameException,
 			InstanceAlreadyExistsException, MBeanRegistrationException, NotCompliantMBeanException {
 		ObjectName objName = new ObjectName(jmxServerName + ":name=" + UrlUtils.removePort(spiderStatus.getName()));
 		mbeanServer.registerMBean(spiderStatus, objName);
