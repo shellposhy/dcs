@@ -46,7 +46,7 @@ public class LoginController extends BaseController {
 		if (null == currentUser) {
 			return "/admin/login";
 		}
-		return "/admin/index";
+		return "redirect:/admin/site";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -91,7 +91,7 @@ public class LoginController extends BaseController {
 		if (!Strings.isNullOrEmpty(request.getParameter("from"))) {
 			return "redirect:" + request.getParameter("from");
 		}
-		return "redirect:/admin/index";
+		return "redirect:/admin/site";
 	}
 
 	@RequestMapping("/index")
@@ -101,7 +101,7 @@ public class LoginController extends BaseController {
 		if (null == currentUser) {
 			return "/admin/login";
 		} else {
-			return "/admin/index";
+			return "redirect:/admin/site";
 		}
 	}
 }
